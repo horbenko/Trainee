@@ -1,6 +1,5 @@
 package config;
 
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,7 +15,6 @@ import static config.SiteConfig.*;
 
 public class BaseConfig {
     private static EventFiringWebDriver driver;
-    private WebDriverWait wait;
 
     private WebDriver getDriver(String browser) {
         switch (browser) {
@@ -71,7 +69,9 @@ public class BaseConfig {
         return driver;
     }
 
-    public void tearDown(String browser) {
+    @AfterGroups
+    @Parameters("selenium.browser")
+    public void tearDown(@Optional("chrome") String browser) {
         if (driver != null) {
             driver.quit();
         }

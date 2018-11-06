@@ -1,26 +1,34 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class AccountArea extends BasePage {
-    private final By textField = By.className("category");
+
+    @FindBy(className = "category")
+    private WebElement textField;
+
+    @FindBy(css = "a.icon-lock")
+    private WebElement iconLockBtn;
+
+    @FindBy(className = "cl_name")
+    private WebElement accountFullName;
+
     private final String checkStr = "Личный кабинет";
-    private final By iconLockBtn = By.cssSelector("a.icon-lock");
-    private final By accountFullName = By.className("cl_name");
     private final String fullNameStr = "Фамилия Имя Отчество";
 
     public boolean isAccountArea() {
        waitIsVisible(textField);
-       return (driver.findElement(textField).getText().equals(checkStr));
+       return (textField.getText().equals(checkStr));
     }
 
     public boolean isCorrectAccountFullName() {
         waitIsVisible(accountFullName);
-        return (driver.findElement(accountFullName).getText().equals(fullNameStr));
+        return (accountFullName).getText().equals(fullNameStr);
     }
 
-    public String getIconLockText() {
-        waitIsVisible(iconLockBtn);
-        return driver.findElement(iconLockBtn).getText();
+    public boolean isExitTextVisible() {
+        return waitIsToBeTextPresent(iconLockBtn, "Выйти");
     }
 }

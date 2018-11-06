@@ -1,26 +1,33 @@
 package pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 import static config.SiteConfig.*;
 
 public class LoginForm extends BasePage {
-    private final By loginField = By.id("input-name");
-    private final By passField = By.id("input-password");
-    private final By loginBtn = By.id("login_but");
+
+    @FindBy(id = "input-name")
+    private WebElement inputName;
+
+    @FindBy(id = "input-password")
+    private WebElement inputPassword;
+
+    @FindBy(id = "login_but")
+    private WebElement loginBtn;
 
     public void setUsername() {
-        waitIsVisible(loginField);
-        driver.findElement(loginField).sendKeys(Config.getUsername());
+        waitIsVisible(inputName);
+        inputName.sendKeys(Config.getUsername());
     }
 
     public void setPassword() {
-        waitIsVisible(passField);
-        driver.findElement(passField).sendKeys(Config.getPassword());
+        waitIsVisible(inputPassword);
+        inputPassword.sendKeys(Config.getPassword());
     }
 
     public void clickLoginBtn() {
         waitIsClickable(loginBtn);
-        driver.findElement(loginBtn).click();
+        loginBtn.click();
     }
 }

@@ -1,13 +1,24 @@
 package pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
-     private final By singInBtn = By.cssSelector("a.icon-lock");
 
-    public void clickSingIn() {
+    @FindBy(linkText = "Войти")
+    private WebElement singInBtn;
+
+    @FindBy(css = "img.img-responsive")
+    private WebElement homeLogo;
+
+    public void clickSingInBtn() {
         waitIsClickable(singInBtn);
-        driver.findElement(singInBtn).click();
+        singInBtn.click();
+    }
+
+    public void goHomePage() {
+        waitIsClickable(homeLogo);
+        homeLogo.click();
     }
 
 }
