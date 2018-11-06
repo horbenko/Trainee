@@ -1,12 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import static config.SiteConfig.*;
 
 public class LoginForm extends BasePage {
-    public static WebElement element;
     private final By loginField = By.id("input-name");
     private final By passField = By.id("input-password");
     private final By loginBtn = By.id("login_but");
@@ -21,7 +19,7 @@ public class LoginForm extends BasePage {
         driver.findElement(passField).sendKeys(Config.getPassword());
     }
 
-    public void clickLogin() {
+    public void clickLoginBtn() {
         waitIsClickable(loginBtn);
         driver.findElement(loginBtn).click();
     }

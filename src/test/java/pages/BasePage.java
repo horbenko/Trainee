@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 class BasePage {
-    private final int MAX_SECONDS_WAIT = 30;
+    private final int MAX_SECONDS_WAIT = 10;
     final WebDriver driver;
     private final WebDriverWait wait;
 
