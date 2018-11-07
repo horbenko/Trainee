@@ -3,7 +3,6 @@ package tests;
 import config.BaseConfig;
 import org.testng.annotations.*;
 import pages.HomePage;
-import pages.LoginForm;
 import pages.AccountArea;
 
 import static org.testng.Assert.assertTrue;
@@ -14,11 +13,7 @@ public class Case1 extends BaseConfig {
     public void testCase1() {
         //-залогиниться под валидными данными
         HomePage homePage = new HomePage();
-        homePage.clickSingInBtn();
-        LoginForm loginForm = new LoginForm();
-        loginForm.setUsername();
-        loginForm.setPassword();
-        loginForm.clickLoginBtn();
+        homePage.clickSingInBtn().loginUser();
 
         //- ссылка "Войти" должна замениться на "Выйти"
         AccountArea accountArea = new AccountArea();

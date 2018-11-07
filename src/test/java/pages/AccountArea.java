@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -30,5 +29,16 @@ public class AccountArea extends BasePage {
 
     public boolean isExitTextVisible() {
         return waitIsToBeTextPresent(iconLockBtn, "Выйти");
+    }
+
+    @Override
+    public String toString() {
+        return "AccountArea{" +
+                "textField=" + textField +
+                ", iconLockBtn=" + iconLockBtn +
+                ", accountFullName=" + accountFullName +
+                ", checkStr='" + checkStr + '\'' +
+                ", fullNameStr='" + fullNameStr + '\'' +
+                '}';
     }
 }

@@ -55,10 +55,13 @@ public class BaseConfig {
         return resource;
     }
 
+    @BeforeTest
     @BeforeClass
+    @BeforeGroups
     @Parameters({"selenium.browser"})
     public void setUp(@Optional("chrome") String browser) {
         driver = new EventFiringWebDriver(getDriver(browser));
+        driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -69,7 +72,8 @@ public class BaseConfig {
         return driver;
     }
 
-    @AfterGroups
+    //@AfterClass
+    //@AfterGroups
     @Parameters("selenium.browser")
     public void tearDown(@Optional("chrome") String browser) {
         if (driver != null) {

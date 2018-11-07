@@ -16,18 +16,32 @@ public class LoginForm extends BasePage {
     @FindBy(id = "login_but")
     private WebElement loginBtn;
 
-    public void setUsername() {
+    private void setUsername() {
         waitIsVisible(inputName);
         inputName.sendKeys(Config.getUsername());
     }
 
-    public void setPassword() {
+    private void setPassword() {
         waitIsVisible(inputPassword);
         inputPassword.sendKeys(Config.getPassword());
     }
 
-    public void clickLoginBtn() {
+    private void clickLoginBtn() {
         waitIsClickable(loginBtn);
         loginBtn.click();
+    }
+
+    public void loginUser() {
+        setUsername();
+        setPassword();
+        clickLoginBtn();
+    }
+
+    @Override
+    public String toString() {
+        return "LoginForm{" +
+                "inputName=" + inputName +
+                ", loginBtn=" + loginBtn +
+                '}';
     }
 }
