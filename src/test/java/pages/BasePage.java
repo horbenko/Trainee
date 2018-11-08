@@ -12,7 +12,7 @@ import java.util.List;
 
 class BasePage {
     private final int MAX_SECONDS_WAIT = 10;
-    private final WebDriver driver;
+    final WebDriver driver;
     private final WebDriverWait wait;
 
     @FindBy(css = "img.img-responsive")
@@ -24,7 +24,7 @@ class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public void goHomePage() {
+    public void gotoHomePage() {
         waitIsClickable(homeLogo);
         homeLogo.click();
     }
@@ -41,8 +41,13 @@ class BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(list));
     }
 
+    void waitForUrl(String url) {
+        wait.until(ExpectedConditions.urlContains(url));
+    }
+
     boolean waitIsToBeTextPresent(WebElement element, String str) {
         return wait.until(ExpectedConditions.textToBePresentInElement(element, str));
     }
+
 
 }

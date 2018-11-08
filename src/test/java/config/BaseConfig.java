@@ -55,7 +55,6 @@ public class BaseConfig {
         return resource;
     }
 
-    @BeforeTest
     @BeforeClass
     @BeforeGroups
     @Parameters({"selenium.browser"})
@@ -72,8 +71,8 @@ public class BaseConfig {
         return driver;
     }
 
-    //@AfterClass
-    //@AfterGroups
+/*    @AfterClass
+    @AfterGroups*/
     @Parameters("selenium.browser")
     public void tearDown(@Optional("chrome") String browser) {
         if (driver != null) {

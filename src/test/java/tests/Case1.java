@@ -13,7 +13,7 @@ public class Case1 extends BaseConfig {
     public void testCase1() {
         //-залогиниться под валидными данными
         HomePage homePage = new HomePage();
-        homePage.clickSingInBtn().loginUser();
+        assertTrue(homePage.clickSingInBtn().loginUser("my_test_mail@meta.ua", "mytestpassword"), "Login is failed.");
 
         //- ссылка "Войти" должна замениться на "Выйти"
         AccountArea accountArea = new AccountArea();

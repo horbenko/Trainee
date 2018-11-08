@@ -3,7 +3,6 @@ package tests;
 import config.BaseConfig;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.MenuElements;
 
 public class Case2 extends BaseConfig {
 
@@ -11,7 +10,12 @@ public class Case2 extends BaseConfig {
     public void testCase2() {
         // - добавить несколько товаров в корзину путем навигации по сайту
         HomePage homePage = new HomePage();
-        homePage.selectRandomMenuCategory();
+        homePage.selectRandomFromMainMenuCategories().
+                selectRandomProduct().
+                clickBuyBtn().
+                clickContinueToBuyBtn();
+        //homePage.selectRandomFromMainMenuCategories().selectRandomProduct().clickBuyBtn().clickContinueToBuyBtn().gotoHomePage();
+        //homePage.selectRandomFromMainMenuCategories().selectRandomProduct().clickBuyBtn().clickContinueToBuyBtn();
 
         }
 
