@@ -2,11 +2,12 @@ package pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class AccountArea extends BasePage {
 
     @FindBy(className = "category")
-    private WebElement textField;
+    private WebElement accountAreaStr;
 
     @FindBy(css = "a.icon-lock")
     private WebElement iconLockBtn;
@@ -15,30 +16,35 @@ public class AccountArea extends BasePage {
     private WebElement accountFullName;
 
     private final String checkStr = "Личный кабинет";
-    private final String fullNameStr = "Фамилия Имя Отчество";
+    private final String accountFullNameCheckStr = "Фамилия Имя Отчество";
+
+    public AccountArea() {
+        super();
+        PageFactory.initElements(driver, this);
+    }
 
     public boolean isAccountArea() {
-       waitIsVisible(textField);
-       return (textField.getText().equals(checkStr));
+       waitIsVisible(accountAreaStr);
+       return (accountAreaStr.getText().equals(checkStr));
     }
 
     public boolean isCorrectAccountFullName() {
         waitIsVisible(accountFullName);
-        return (accountFullName).getText().equals(fullNameStr);
+        return (accountFullName).getText().equals(accountFullNameCheckStr);
     }
 
-    public boolean isExitTextVisible() {
+    public boolean isExitTextPresent() {
         return waitIsToBeTextPresent(iconLockBtn, "Выйти");
     }
 
     @Override
     public String toString() {
         return "AccountArea{" +
-                "textField=" + textField +
+                "accountAreaStr=" + accountAreaStr +
                 ", iconLockBtn=" + iconLockBtn +
                 ", accountFullName=" + accountFullName +
                 ", checkStr='" + checkStr + '\'' +
-                ", fullNameStr='" + fullNameStr + '\'' +
+                ", accountFullNameCheckStr='" + accountFullNameCheckStr + '\'' +
                 '}';
     }
 }

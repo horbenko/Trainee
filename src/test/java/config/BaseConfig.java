@@ -1,5 +1,6 @@
 package config;
 
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,10 +30,12 @@ public class BaseConfig {
                         getResource("/MicrosoftWebDriver.exe"));
                 return new InternetExplorerDriver();
             case "chrome":
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("prefs", "--disable-notifications");
                 System.setProperty(
                         "webdriver.chrome.driver",
                         getResource("/chromedriver.exe"));
-                return new ChromeDriver();
+                return new ChromeDriver(options);
             default:
                 throw new IllegalArgumentException("Unsupported " + browser + " browser.");
         }
@@ -56,7 +59,6 @@ public class BaseConfig {
     }
 
     @BeforeClass
-    @BeforeGroups
     @Parameters({"selenium.browser"})
     public void setUp(@Optional("chrome") String browser) {
         driver = new EventFiringWebDriver(getDriver(browser));
@@ -71,8 +73,7 @@ public class BaseConfig {
         return driver;
     }
 
-/*    @AfterClass
-    @AfterGroups*/
+    //@AfterClass
     @Parameters("selenium.browser")
     public void tearDown(@Optional("chrome") String browser) {
         if (driver != null) {

@@ -1,6 +1,7 @@
 package pages;
 
 import config.BaseConfig;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,6 +26,7 @@ class BasePage {
     }
 
     public void gotoHomePage() {
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("#cart_modal > div")));
         waitIsClickable(homeLogo);
         homeLogo.click();
     }

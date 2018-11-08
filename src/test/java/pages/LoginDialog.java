@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginDialog extends BasePage {
 
@@ -14,6 +15,11 @@ public class LoginDialog extends BasePage {
 
     @FindBy(id = "login_but")
     private WebElement loginBtn;
+
+    public LoginDialog() {
+        super();
+        PageFactory.initElements(driver, this);
+    }
 
     public void setUsername(String username) {
         waitIsVisible(inputName);
