@@ -73,7 +73,7 @@ public class BaseConfig {
         return driver;
     }
 
-    //@AfterClass
+    @AfterClass
     @Parameters("selenium.browser")
     public void tearDown(@Optional("chrome") String browser) {
         if (driver != null) {

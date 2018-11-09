@@ -12,7 +12,7 @@ public class HomePage extends BasePage {
     @FindBy(linkText = "Войти")
     private WebElement singInBtn;
 
-    @FindBy(css = "button.icon-cart")
+    @FindBy(css = "#top_form_cart > div > button")
     private WebElement cartBtn;
 
     @FindBy(className = "categories-block-a")
@@ -29,10 +29,10 @@ public class HomePage extends BasePage {
         return new LoginDialog();
     }
 
-    public ProductCart clickCartBtn() {
+    public DialogCartMenu clickCartBtn() {
         waitIsClickable(cartBtn);
         cartBtn.click();
-        return new ProductCart();
+        return new DialogCartMenu();
     }
 
     public List getListOfMainMenuCategories() {
@@ -46,6 +46,15 @@ public class HomePage extends BasePage {
         int randomNum = ThreadLocalRandom.current().nextInt(0, mainMenuCategories.size());
         if (randomNum == exclude) selectRandomMainMenuCategory();
         mainMenuCategories.get(randomNum).click();
+        return new MenuElements();
+    }
+
+    public MenuElements selectMainMenuCategory(int menuCategoryNumber) {
+        List<WebElement> mainMenuCategories = getListOfMainMenuCategories();
+        if (menuCategoryNumber < 0 || menuCategoryNumber > mainMenuCategories.size()) {
+            throw new IllegalArgumentException("Couldn't select menu category.");
+        }
+        mainMenuCategories.get(menuCategoryNumber).click();
         return new MenuElements();
     }
 
