@@ -1,6 +1,7 @@
 package tests;
 
 import config.BaseConfig;
+import io.qameta.allure.Description;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -12,7 +13,7 @@ import static org.testng.Assert.assertTrue;
 
 class Tests extends BaseConfig {
 
-    @Test(priority = 0)
+    @Test(description = "Login test for the registered user.")
     void loginUserTest() {
         HomePage homePage = new HomePage();
 
@@ -28,10 +29,10 @@ class Tests extends BaseConfig {
 
         // - пользователь перенаправлен на страницу личного кабинета
         assertTrue(accountArea.isAccountArea(), "User is NOT redirected to personal account page.");
-        homePage.gotoHomePage();
+        homePage.clickHomePage();
     }
 
-    @Test(priority = 0)
+    @Test(description = "Test to compare added and present products in the cart.")
     void cartsItemsTest() {
         int productsToTest = 2;
         float totalPriceForTest = 0f;
@@ -48,13 +49,13 @@ class Tests extends BaseConfig {
             totalPriceForTest += homePage.selectRandomMainMenuCategory().selectRandomProduct().getPrice();
             productNamesForTest.add(productMenu.getProductName());
             productMenu.clickBuyBtn().clickContinueToBuyBtn();
-            homePage.gotoHomePage();
+            homePage.clickHomePage();
         }
 
         //- сумма в корзине соответсвует сумме товаров
         assertEquals(totalPriceForTest, homePage.clickCartBtn().getTotalPriceValue(), 0.0, "The total price in the basket is NOT corresponds to the sum of selected products.");
         dialogCartMenu.clickCloseCartBtn();
-        homePage.gotoHomePage();
+        homePage.clickHomePage();
 
         //- выбраные товары присутсвуют в корзине
         receivedProductNames = homePage.clickCartBtn().getAllProductsNames();
@@ -63,10 +64,10 @@ class Tests extends BaseConfig {
         }
         dialogCartMenu.deleteAllProducts();
         dialogCartMenu.clickCloseCartBtn();
-        homePage.gotoHomePage();
+        homePage.clickHomePage();
     }
 
-    @Test(priority = 0)
+    @Test(description = "Test to check filters.") //TODO Check 2 last asserts
     void filtersCheck() {
         HomePage homePage = new HomePage();
         MenuElements menuElements = new MenuElements();
@@ -97,12 +98,11 @@ class Tests extends BaseConfig {
             }
             assertTrue(containsNotOnlyFirstMenuStr, "All products are contain checked string.");
 
-        //- применить фильтр "В наличии" -> появляться Асик майнеры с текстом "В наличии" в ссылки на товар
+/*        //- применить фильтр "В наличии" -> появляться Асик майнеры с текстом "В наличии" в ссылки на товар
         menuElements.getAllProductsNames();
         List<String> secondFilteredList = menuElements.getAllProductsNames();
         for (String productName:secondFilteredList
         ) {
-            System.out.println(productName);
             assertTrue(productName.contains(secondMenuStr), "Some product not contains checked string.");
         }
 
@@ -112,12 +112,41 @@ class Tests extends BaseConfig {
         boolean containsNotOnlySecondMenuStr = false;
         for (String productName:secondUnfilteredList
         ) {
-            System.out.println(productName);
             if (!productName.contains(secondMenuStr)) {
                 containsNotOnlySecondMenuStr = true;
                 break;
             }
         }
         assertTrue(containsNotOnlySecondMenuStr, "All products are contain checked string.");
+        homePage.clickHomePage();*/
+    }
+
+    //Проверка ссылок секции "Компания", "Покупателям" в футтере сайта
+    // - последовательно перейти по каждой ссылке -> отображается страница корректная страница
+    @Test(dataProvider = "getDataForFooterLinksCheck")
+    @Description("Test to check footer links.")
+    void footerLinkCheck(String linkText, String  title) {
+        HomePage homePage = new HomePage();
+        assertEquals(homePage.clickOnLinkByText(linkText).getPageTitle(), title);
+        homePage.getHomePage();
+    }
+
+    @DataProvider
+    public Object[][] getDataForFooterLinksCheck() {
+        return new Object[][]{
+                {"Статьи", "Список новостей Рубрика: Наши обзоры"},
+                {"Новости", "Список новостей"},
+                {"Контакты", "Связаться с нами"},
+                {"О компании СМТ", "О Компании СМТ - Интернет магазин SMT.UA"},
+                {"Миссия компании СМТ", "Миссия компании СМТ - Интернет магазин SMT.UA"},
+                {"Сертификаты", "Сертификаты - Интернет магазин SMT.UA"},
+                {"Вакансии", "Вакансии - Интернет магазин SMT.UA"},
+                {"Карта сайта", "Карта сайта"},
+                {"Собрать компьютер", "Собрать компьютер в Харькове, системный блок, сборка конфигурации системника онлайн в Украине, Киеве, Одессе, Донецке, Днепропетровске – Интернет магазин SMT.UA"},
+                {"Оплата и доставка", "Оплата и доставка майнинг оборудования по Украине - Интернет магазин SMT."},
+                {"Сервис и гарантия", "Сервисный центр - интернет-магазин smt.ua"},
+                {"Сотрудничество", "Оптовый поставщик компьютеров, планшетов, ноутбуков, комплектующих, компьютерной техники, компьютеры оптом, опт компьютеры, ноутбуки оптом, опт ноутбуки. - Интернет магазин SMT.UA"},
+                {"Каталог производителей", "Каталог производителей электроники, компьютерной техники и бытовой техники в Украине - интернет магазин SMT.UA" }
+        };
     }
 }

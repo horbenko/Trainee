@@ -11,24 +11,41 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-class BasePage {
+import static config.BaseConfig.getDriver;
+
+public class BasePage {
     private final int MAX_SECONDS_WAIT = 10;
-    final WebDriver driver;
-    private final WebDriverWait wait;
+    public final WebDriver driver;
+    public final WebDriverWait wait;
+    private final String HOME_PAGE_URL = "https://smt.ua";
 
     @FindBy(css = "img.img-responsive")
     private WebElement homeLogo;
 
-    BasePage() {
-        driver = BaseConfig.getDriver();
+    public BasePage() {
+        driver = getDriver();
         wait = new WebDriverWait(driver, MAX_SECONDS_WAIT);
         PageFactory.initElements(driver, this);
     }
 
-    public void gotoHomePage() {
+    public HomePage clickHomePage() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("#cart_modal > div")));
         waitIsClickable(homeLogo);
         homeLogo.click();
+        return new HomePage();
+    }
+
+    public BasePage clickOnLinkByText(String linkText) {
+        driver.findElement(By.linkText(linkText)).click();
+        return new BasePage();
+    }
+
+    public void getHomePage() {
+        driver.get(HOME_PAGE_URL);
+    }
+
+    public String getPageTitle() {
+        return driver.getTitle();
     }
 
     void waitIsClickable(WebElement element) {
@@ -50,6 +67,5 @@ class BasePage {
     boolean waitIsToBeTextPresent(WebElement element, String str) {
         return wait.until(ExpectedConditions.textToBePresentInElement(element, str));
     }
-
 
 }

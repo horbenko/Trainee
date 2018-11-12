@@ -49,13 +49,13 @@ public class MenuElements extends BasePage {
         return productNameStr.getText();
     }
 
-    public List<WebElement> getOtherOptinsFilterElements() {
+    public List<WebElement> getOtherOptionsFilterElements() {
         waitIsAllVisible(otherOptionsFilter);
         return otherOptionsFilter;
     }
 
     public boolean clickOtherOptinsFilterElements(String strToMatch) {
-        List<WebElement> otherOptionsFilterElements = getOtherOptinsFilterElements();
+        List<WebElement> otherOptionsFilterElements = getOtherOptionsFilterElements();
         for (WebElement element:otherOptionsFilterElements
              ) {
             if(element.getText().contains(strToMatch)) {

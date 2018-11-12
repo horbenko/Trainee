@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.List;
 
 public class HomePage extends BasePage {
+    private final String PAGE_URL = "https://smt.ua";
 
     @FindBy(linkText = "Войти")
     private WebElement singInBtn;
@@ -17,6 +18,9 @@ public class HomePage extends BasePage {
 
     @FindBy(className = "categories-block-a")
     private List<WebElement> itemsOfMainMenuCategories;
+
+    @FindBy(css = "div.column > ul >li")
+    private List<WebElement> footerLinks;
 
     public HomePage() {
         super();
@@ -56,6 +60,11 @@ public class HomePage extends BasePage {
         }
         mainMenuCategories.get(menuCategoryNumber).click();
         return new MenuElements();
+    }
+
+    public List<WebElement> getFooterLinks() {
+        waitIsAllVisible(footerLinks);
+        return footerLinks;
     }
 
 }

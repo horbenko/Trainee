@@ -50,7 +50,7 @@ public class LoginDialog extends BasePage {
             return true;
         }
         catch (TimeoutException exception) {
-            gotoHomePage();
+            clickHomePage();
             return false;
         }
     }
