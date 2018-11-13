@@ -98,7 +98,7 @@ class Tests extends BaseConfig {
             }
             assertTrue(containsNotOnlyFirstMenuStr, "All products are contain checked string.");
 
-/*        //- применить фильтр "В наличии" -> появляться Асик майнеры с текстом "В наличии" в ссылки на товар
+        //- применить фильтр "В наличии" -> появляться Асик майнеры с текстом "В наличии" в ссылки на товар
         menuElements.getAllProductsNames();
         List<String> secondFilteredList = menuElements.getAllProductsNames();
         for (String productName:secondFilteredList
@@ -118,7 +118,7 @@ class Tests extends BaseConfig {
             }
         }
         assertTrue(containsNotOnlySecondMenuStr, "All products are contain checked string.");
-        homePage.clickHomePage();*/
+        homePage.clickHomePage();
     }
 
     //Проверка ссылок секции "Компания", "Покупателям" в футтере сайта

@@ -22,19 +22,19 @@ public class BaseConfig {
             case "firefox":
                 System.setProperty(
                         "webdriver.gecko.driver",
-                        getResource("/geckodriver.exe"));
+                        getResource("/drivers/geckodriver.exe"));
                 return new FirefoxDriver();
             case "edge":
                 System.setProperty(
                         "webdriver.edge.driver",
-                        getResource("/MicrosoftWebDriver.exe"));
+                        getResource("/drivers/MicrosoftWebDriver.exe"));
                 return new InternetExplorerDriver();
             case "chrome":
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("prefs", "--disable-notifications");
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        getResource("/chromedriver.exe"));
+                        getResource("/drivers/chromedriver.exe"));
                 return new ChromeDriver(options);
             default:
                 throw new IllegalArgumentException("Unsupported " + browser + " browser.");
