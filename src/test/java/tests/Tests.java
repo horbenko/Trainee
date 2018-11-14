@@ -58,16 +58,15 @@ class Tests extends BaseConfig {
         homePage.clickHomePage();
 
         //- выбраные товары присутсвуют в корзине
-        receivedProductNames = homePage.clickCartBtn().getAllProductsNames();
+        receivedProductNames = homePage.clickCartBtn().getAllProductsNamesInList();
         for (String productName : productNamesForTest){
             assertTrue(receivedProductNames.contains(productName), "Some products name are not equal.");
         }
-        dialogCartMenu.deleteAllProducts();
-        dialogCartMenu.clickCloseCartBtn();
+        dialogCartMenu.deleteAllProducts().clickCloseCartBtn();
         homePage.clickHomePage();
     }
 
-    @Test(description = "Test to check filters.") //TODO Check 2 last asserts
+    @Test(description = "Test to check filters.")
     void filtersCheck() {
         HomePage homePage = new HomePage();
         MenuElements menuElements = new MenuElements();
@@ -75,19 +74,19 @@ class Tests extends BaseConfig {
         String secondMenuStr = "В наличии";
 
         //- перейти на страницу Главная -> Асик майнеры (Asic) -> Асик майнеры (Asic)
-        homePage.selectMainMenuCategory(0).clickOtherOptinsFilterElements(firstMenuStr); // 0 index for Asic category
+        List<String> firstFilteredList = homePage.selectMainMenuCategory(0).
+                                        //- применить фильтр SHA-256
+                                        clickOtherOptionsFilterElements(firstMenuStr).
+                                        getAllProductsNamesInList(); // 0 index for Asic category
 
-        //- применить фильтр SHA-256 -> появляться Асик майнеры с текстом SHA-256 в ссылки на товар
-        menuElements.getAllProductsNames();
-        List<String> firstFilteredList = menuElements.getAllProductsNames();
-        for (String productName:firstFilteredList
-             ) {
+        //-> появляться Асик майнеры с текстом SHA-256 в ссылки на товар
+        for (String productName:firstFilteredList) {
             assertTrue(productName.contains(firstMenuStr), "Some product not contains checked string.");
         }
 
         //- отменить фильтр SHA-256 -> появляться Асик майнеры с текстом и без текста SHA-256 в ссылки на товар
-        menuElements.clickOtherOptinsFilterElements(firstMenuStr);
-        List<String> unfilteredFirstList = menuElements.getAllProductsNames();
+        menuElements.clickOtherOptionsFilterElements(firstMenuStr);
+        List<String> unfilteredFirstList = menuElements.getAllProductsNamesInList();
         boolean containsNotOnlyFirstMenuStr = false;
              for (String productName:unfilteredFirstList
             ) {
@@ -99,16 +98,15 @@ class Tests extends BaseConfig {
             assertTrue(containsNotOnlyFirstMenuStr, "All products are contain checked string.");
 
         //- применить фильтр "В наличии" -> появляться Асик майнеры с текстом "В наличии" в ссылки на товар
-        menuElements.getAllProductsNames();
-        List<String> secondFilteredList = menuElements.getAllProductsNames();
-        for (String productName:secondFilteredList
-        ) {
+        menuElements.clickOtherOptionsFilterElements(secondMenuStr);
+        List<String> secondFilteredList = menuElements.getAllProductsNamesInList();
+        for (String productName:secondFilteredList) {
             assertTrue(productName.contains(secondMenuStr), "Some product not contains checked string.");
         }
 
         //- отменить фильтр "В наличии" -> появляться Асик майнеры с текстом и без текста "В наличии" в ссылки на товар
-        menuElements.clickOtherOptinsFilterElements(secondMenuStr);
-        List<String> secondUnfilteredList = menuElements.getAllProductsNames();
+        menuElements.clickOtherOptionsFilterElements(secondMenuStr);
+        List<String> secondUnfilteredList = menuElements.getAllProductsNamesInList();
         boolean containsNotOnlySecondMenuStr = false;
         for (String productName:secondUnfilteredList
         ) {

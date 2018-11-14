@@ -49,24 +49,22 @@ public class MenuElements extends BasePage {
         return productNameStr.getText();
     }
 
-    public List<WebElement> getOtherOptionsFilterElements() {
+    public List<WebElement> getOtherOptionsFilterElementsInList() {
         waitIsAllVisible(otherOptionsFilter);
         return otherOptionsFilter;
     }
 
-    public boolean clickOtherOptinsFilterElements(String strToMatch) {
-        List<WebElement> otherOptionsFilterElements = getOtherOptionsFilterElements();
-        for (WebElement element:otherOptionsFilterElements
-             ) {
+    public MenuElements clickOtherOptionsFilterElements(String strToMatch) {
+        List<WebElement> otherOptionsFilterElements = getOtherOptionsFilterElementsInList();
+        for (WebElement element:otherOptionsFilterElements) {
             if(element.getText().contains(strToMatch)) {
                 element.findElement(By.xpath("//div[@id=\"other-options\"]//label[contains(., \"" + strToMatch + "\")]")).click();
-                return true;
+                return new MenuElements();
             }
-        }
-        return false;
+        } throw new IllegalArgumentException("Cannot select provided filter element.");
     }
 
-    public List<String> getAllProductsNames() {
+    public List<String> getAllProductsNamesInList() {
         List<String> productsNames = new LinkedList<>();
         List<WebElement> elements = getElements();
         for (WebElement element:elements

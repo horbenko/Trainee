@@ -48,7 +48,7 @@ public class HomePage extends BasePage {
         int exclude = 6;  // Exclude temporary empty category
         List<WebElement> mainMenuCategories = getListOfMainMenuCategories();
         int randomNum = ThreadLocalRandom.current().nextInt(0, mainMenuCategories.size());
-        if (randomNum == exclude) selectRandomMainMenuCategory();
+        if (randomNum == exclude) mainMenuCategories.get(randomNum + 1).click();
         mainMenuCategories.get(randomNum).click();
         return new MenuElements();
     }
@@ -56,7 +56,7 @@ public class HomePage extends BasePage {
     public MenuElements selectMainMenuCategory(int menuCategoryNumber) {
         List<WebElement> mainMenuCategories = getListOfMainMenuCategories();
         if (menuCategoryNumber < 0 || menuCategoryNumber > mainMenuCategories.size()) {
-            throw new IllegalArgumentException("Couldn't select menu category.");
+            throw new IllegalArgumentException("Cannot select menu category.");
         }
         mainMenuCategories.get(menuCategoryNumber).click();
         return new MenuElements();

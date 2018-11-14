@@ -19,7 +19,7 @@ public class BasePage {
     public final WebDriverWait wait;
     private final String HOME_PAGE_URL = "https://smt.ua";
 
-    @FindBy(css = "img.img-responsive")
+    @FindBy(css = "#logo")
     private WebElement homeLogo;
 
     public BasePage() {

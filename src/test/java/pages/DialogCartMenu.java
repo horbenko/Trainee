@@ -46,8 +46,7 @@ public class DialogCartMenu extends BasePage {
     public float getTotalPriceValue() {
         waitIsVisible(totalPriceValue);
         String strTotalPrice = totalPriceValue.getText().replaceAll("\\D+","");
-        float totalprice = Float.parseFloat(strTotalPrice);
-        return totalprice;
+        return Float.parseFloat(strTotalPrice);
     }
 
     public String getProductName() {
@@ -60,7 +59,7 @@ public class DialogCartMenu extends BasePage {
         closeCartBtn.click();
     }
 
-    public TreeSet<String> getAllProductsNames() {
+    public TreeSet<String> getAllProductsNamesInList() {
         TreeSet<String> productsNames = new TreeSet<>();
         List<WebElement> elements = getListOfElementsInCart();
         for (WebElement element:elements
@@ -70,12 +69,13 @@ public class DialogCartMenu extends BasePage {
          return productsNames;
     }
 
-    public void deleteAllProducts() {
+    public DialogCartMenu deleteAllProducts() {
         List<WebElement> elements = getListOfElementsInCart();
         for (WebElement element:elements
         ) {
             element.findElement(By.cssSelector("td.text-center.del > button")).click();
         }
+        return new DialogCartMenu();
     }
 
 }
