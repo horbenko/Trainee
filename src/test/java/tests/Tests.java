@@ -64,14 +64,12 @@ class Tests extends BaseConfig {
             assertTrue(receivedProductNames.contains(productName), "Some products name are not equal.");
         }
         dialogCartMenu.deleteAllProducts().clickCloseCartBtn();
-        homePage.getHomePage();
     }
 
     @Test(description = "Test to check filters.")
     void filtersCheck() {
         HomePage homePage = new HomePage();
         homePage.getHomePage();
-        DialogCartMenu dialogCartMenu = new DialogCartMenu();
         MenuElements menuElements = new MenuElements();
         String firstMenuStr = "SHA-256";
         String secondMenuStr = "В наличии";
@@ -98,7 +96,7 @@ class Tests extends BaseConfig {
                     break;
                 }
             }
-            assertTrue(containsNotOnlyFirstMenuStr, "All products are contain checked string.");
+            assertTrue(containsNotOnlyFirstMenuStr, "Products are contain only checked string.");
 
         //- применить фильтр "В наличии" -> появляться Асик майнеры с текстом "В наличии" в ссылки на товар
         menuElements.clickOtherOptionsFilterElements(secondMenuStr);
@@ -117,7 +115,7 @@ class Tests extends BaseConfig {
                 break;
             }
         }
-        assertTrue(containsNotOnlySecondMenuStr, "All products are contain checked string.");
+        assertTrue(containsNotOnlySecondMenuStr, "Products are contain only checked string.");
     }
 
     //Проверка ссылок секции "Компания", "Покупателям" в футтере сайта
