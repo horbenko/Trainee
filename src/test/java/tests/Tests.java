@@ -16,6 +16,7 @@ class Tests extends BaseConfig {
     @Test(description = "Login test for the registered user.")
     void loginUserTest() {
         HomePage homePage = new HomePage();
+        homePage.getHomePage();
 
         //-залогиниться под валидными данными
         assertTrue(homePage.clickSingInBtn().loginUser("my_test_mail@meta.ua", "mytestpassword"), "Login is failed.");
@@ -29,7 +30,6 @@ class Tests extends BaseConfig {
 
         // - пользователь перенаправлен на страницу личного кабинета
         assertTrue(accountArea.isAccountArea(), "User is NOT redirected to personal account page.");
-        homePage.clickHomePage();
     }
 
     @Test(description = "Test to compare added and present products in the cart.")
@@ -41,6 +41,7 @@ class Tests extends BaseConfig {
         TreeSet<String> nameComparison = new TreeSet<>();
 
         HomePage homePage = new HomePage();
+        homePage.getHomePage();
         ProductMenu productMenu = new ProductMenu();
         DialogCartMenu dialogCartMenu =new DialogCartMenu();
 
@@ -53,7 +54,7 @@ class Tests extends BaseConfig {
         }
 
         //- сумма в корзине соответсвует сумме товаров
-        assertEquals(totalPriceForTest, homePage.clickCartBtn().getTotalPriceValue(), 0.0, "The total price in the basket is NOT corresponds to the sum of selected products.");
+        assertEquals(totalPriceForTest, homePage.clickCartBtn().getTotalPriceValue(), "The total price in the basket is NOT corresponds to the sum of selected products.");
         dialogCartMenu.clickCloseCartBtn();
         homePage.clickHomePage();
 
@@ -63,12 +64,14 @@ class Tests extends BaseConfig {
             assertTrue(receivedProductNames.contains(productName), "Some products name are not equal.");
         }
         dialogCartMenu.deleteAllProducts().clickCloseCartBtn();
-        homePage.clickHomePage();
+        homePage.getHomePage();
     }
 
     @Test(description = "Test to check filters.")
     void filtersCheck() {
         HomePage homePage = new HomePage();
+        homePage.getHomePage();
+        DialogCartMenu dialogCartMenu = new DialogCartMenu();
         MenuElements menuElements = new MenuElements();
         String firstMenuStr = "SHA-256";
         String secondMenuStr = "В наличии";
@@ -108,15 +111,13 @@ class Tests extends BaseConfig {
         menuElements.clickOtherOptionsFilterElements(secondMenuStr);
         List<String> secondUnfilteredList = menuElements.getAllProductsNamesInList();
         boolean containsNotOnlySecondMenuStr = false;
-        for (String productName:secondUnfilteredList
-        ) {
+        for (String productName:secondUnfilteredList) {
             if (!productName.contains(secondMenuStr)) {
                 containsNotOnlySecondMenuStr = true;
                 break;
             }
         }
         assertTrue(containsNotOnlySecondMenuStr, "All products are contain checked string.");
-        homePage.clickHomePage();
     }
 
     //Проверка ссылок секции "Компания", "Покупателям" в футтере сайта
@@ -125,8 +126,8 @@ class Tests extends BaseConfig {
     @Description("Test to check footer links.")
     void footerLinkCheck(String linkText, String  title) {
         HomePage homePage = new HomePage();
-        assertEquals(homePage.clickOnLinkByText(linkText).getPageTitle(), title);
         homePage.getHomePage();
+        assertEquals(homePage.clickOnLinkByText(linkText).getPageTitle(), title);
     }
 
     @DataProvider

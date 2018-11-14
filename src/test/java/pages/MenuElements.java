@@ -27,13 +27,13 @@ public class MenuElements extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public List<WebElement> getElements() {
+    public List<WebElement> getElementsInList() {
         waitIsAllVisible(itemsOfTheCategorie);
         return itemsOfTheCategorie;
     }
 
     public ProductMenu selectRandomProduct() {
-        List<WebElement> list = getElements();
+        List<WebElement> list = getElementsInList();
         int randomNum = ThreadLocalRandom.current().nextInt(0, list.size());
         list.get(randomNum).click();
         return new ProductMenu();
@@ -66,7 +66,7 @@ public class MenuElements extends BasePage {
 
     public List<String> getAllProductsNamesInList() {
         List<String> productsNames = new LinkedList<>();
-        List<WebElement> elements = getElements();
+        List<WebElement> elements = getElementsInList();
         for (WebElement element:elements
         ) {
             productsNames.add(element.findElement(By.cssSelector("div.right > div.name > a")).getText());

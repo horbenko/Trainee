@@ -6,16 +6,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class AccountArea extends BasePage {
 
-    @FindBy(className = "category")
-    private WebElement accountAreaStr;
-
     @FindBy(css = "a.icon-lock")
     private WebElement iconLockBtn;
 
     @FindBy(className = "cl_name")
     private WebElement accountFullName;
 
-    private final String checkStr = "Личный кабинет";
     private final String accountFullNameCheckStr = "Фамилия Имя Отчество";
 
     public AccountArea() {
@@ -24,8 +20,7 @@ public class AccountArea extends BasePage {
     }
 
     public boolean isAccountArea() {
-       waitIsVisible(accountAreaStr);
-       return (accountAreaStr.getText().equals(checkStr));
+       return (driver.getTitle().equals("Личный Кабинет"));
     }
 
     public boolean isCorrectAccountFullName() {
@@ -40,10 +35,8 @@ public class AccountArea extends BasePage {
     @Override
     public String toString() {
         return "AccountArea{" +
-                "accountAreaStr=" + accountAreaStr +
                 ", iconLockBtn=" + iconLockBtn +
                 ", accountFullName=" + accountFullName +
-                ", checkStr='" + checkStr + '\'' +
                 ", accountFullNameCheckStr='" + accountFullNameCheckStr + '\'' +
                 '}';
     }

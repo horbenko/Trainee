@@ -39,7 +39,7 @@ public class DialogCartMenu extends BasePage {
     }
 
     public List<WebElement> getListOfElementsInCart() {
-        waitIsAllVisible(listOfElements);
+        //waitIsAllVisible(listOfElements);
         return listOfElements;
     }
 
