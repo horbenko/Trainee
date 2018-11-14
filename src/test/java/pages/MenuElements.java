@@ -55,7 +55,8 @@ public class MenuElements extends BasePage {
     }
 
     public MenuElements clickOtherOptionsFilterElements(String strToMatch) {
-        List<WebElement> otherOptionsFilterElements = getOtherOptionsFilterElementsInList();
+        MenuElements menuElements = new MenuElements(); // redo
+        List<WebElement> otherOptionsFilterElements = menuElements.getOtherOptionsFilterElementsInList();
         for (WebElement element:otherOptionsFilterElements) {
             if(element.getText().contains(strToMatch)) {
                 element.findElement(By.xpath("//div[@id=\"other-options\"]//label[contains(., \"" + strToMatch + "\")]")).click();
