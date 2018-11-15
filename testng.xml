@@ -1,8 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Test suite">
+<suite name="Test suite" parallel="tests" thread-count="3">
 
-    <test name="tests">
+    <test name="ChromeTest" verbose="1" parallel="true">
+        <parameter name="browserName" value="chrome" />
+        <classes>
+            <class name="tests.Tests" />
+        </classes>
+    </test>
+
+    <test name="InternetExplorerTest" verbose="1" parallel="true">
+        <parameter name="browserName" value="internet explorer" />
+        <classes>
+            <class name="tests.Tests" />
+        </classes>
+    </test>
+
+    <test name="FireFoxTest" verbose="1" parallel="true">
+        <parameter name="browserName" value="firefox" />
         <classes>
             <class name="tests.Tests" />
         </classes>

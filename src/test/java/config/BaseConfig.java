@@ -24,10 +24,10 @@ public class BaseConfig {
                         "webdriver.gecko.driver",
                         getResource("/drivers/geckodriver.exe"));
                 return new FirefoxDriver();
-            case "edge":
+            case "internet explorer":
                 System.setProperty(
                         "webdriver.edge.driver",
-                        getResource("/drivers/MicrosoftWebDriver.exe"));
+                        getResource("/drivers/IEDriverServer.exe"));
                 return new InternetExplorerDriver();
             case "chrome":
                 ChromeOptions options = new ChromeOptions();
