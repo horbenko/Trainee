@@ -1,3 +1,3 @@
 echo Setup selenium grid enviroment
 cmd /C start/MIN java -jar selenium-server-standalone-3.141.5.jar -role hub -port 4444 -timeout 300 -browserTimeout 360
-cmd /C start/MIN java -Dwebdriver.ie.driver=src\test\resources\drivers\IEDriverServer.exe -Dwebdriver.chrome.driver=src\test\resources\drivers\chromedriver.exe -jar selenium-server-standalone-3.141.5.jar -role node -port 5555 -hub http://localhost:4444/grid/register -nodeConfig NodeConfig.json
+cmd /C start/MIN java -Dwebdriver.ie.driver=src\test\resources\drivers\IEDriverServer.exe -Dwebdriver.chrome.driver=src\test\resources\drivers\chromedriver.exe -Dwebdriver.gecko.driver=src\test\resources\drivers\geckodriver.exe -jar selenium-server-standalone-3.141.5.jar -role node -port 5555 -hub http://localhost:4444/grid/register -nodeConfig NodeConfig.json

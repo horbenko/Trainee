@@ -74,4 +74,5 @@ public class MenuElements extends BasePage {
         }
         return productsNames;
     }
+
 }

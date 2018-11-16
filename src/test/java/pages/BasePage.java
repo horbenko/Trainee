@@ -1,6 +1,5 @@
 package pages;
 
-import config.BaseConfig;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,10 +7,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 
-import static config.BaseConfig.getDriver;
+import config.WebDriverInstansiator;
 
 public class BasePage {
     private final int MAX_SECONDS_WAIT = 10;
@@ -23,7 +21,7 @@ public class BasePage {
     private WebElement homeLogo;
 
     public BasePage() {
-        driver = getDriver();
+        driver = WebDriverInstansiator.getDriver();
         wait = new WebDriverWait(driver, MAX_SECONDS_WAIT);
         PageFactory.initElements(driver, this);
     }

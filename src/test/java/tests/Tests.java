@@ -1,6 +1,5 @@
 package tests;
 
-import config.BaseConfig;
 import io.qameta.allure.Description;
 import org.testng.annotations.*;
 import pages.*;
@@ -11,7 +10,9 @@ import java.util.TreeSet;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-class Tests extends BaseConfig {
+class Tests extends BaseTest {
+
+
 
     @Test(description = "Login test for the registered user.")
     void loginUserTest() {
