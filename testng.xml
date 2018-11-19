@@ -11,7 +11,7 @@
     </test>
 
     <test name="InternetExplorerTest" verbose="1" parallel="true">
-        <parameter name="browserName" value="internet explorer" />
+        <parameter name="browserName" value="ie" />
         <classes>
             <class name="tests.Tests" />
         </classes>

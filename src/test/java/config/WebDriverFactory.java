@@ -52,19 +52,19 @@ public class WebDriverFactory {
                         getResource("/drivers/geckodriver.exe"));
                 return new FirefoxDriver();
             case IE:
-                InternetExplorerOptions options1 = new InternetExplorerOptions();
-                options1.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
+                InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+                ieOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
                 System.setProperty(
                         "webdriver.ie.driver",
                         getResource("/drivers/IEDriverServer.exe"));
-                return new InternetExplorerDriver(options1);
+                return new InternetExplorerDriver(ieOptions);
             case CHROME:
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("prefs", "--disable-notifications");
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("prefs", "--disable-notifications");
                 System.setProperty(
                         "webdriver.chrome.driver",
                         getResource("/drivers/chromedriver.exe"));
-                return new ChromeDriver(options);
+                return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");
         }
