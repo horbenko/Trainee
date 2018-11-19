@@ -70,6 +70,11 @@ public class WebDriverFactory {
         }
     }
 
+    public void getOS() {
+        System.getProperty("os.name");
+        System.out.println(System.getProperty("os.name"));
+    }
+
     /**
      * @param resource The name of the resource
      * @return Path to resource

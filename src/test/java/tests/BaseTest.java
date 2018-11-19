@@ -1,11 +1,13 @@
 package tests;
 
 import config.BrowserNames;
+import config.TestListener;
 import config.WebDriverFactory.*;
 import org.testng.annotations.*;
 
 import static config.WebDriverInstansiator.*;
 
+@Listeners(TestListener.class)
 public class BaseTest {
 
     @BeforeClass
@@ -20,5 +22,4 @@ public class BaseTest {
     public void tearDown() throws Exception{
         getDriver().quit();
     }
-
 }

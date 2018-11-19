@@ -3,7 +3,7 @@
   [
     {
       "browserName": "firefox",
-      "marionette": true,
+      "marionette": false,
       "maxInstances": 5,
       "seleniumProtocol": "WebDriver"
     },

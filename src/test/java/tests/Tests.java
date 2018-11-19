@@ -1,6 +1,7 @@
 package tests;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.testng.annotations.*;
 import pages.*;
 
@@ -12,6 +13,7 @@ import static org.testng.Assert.assertTrue;
 
 class Tests extends BaseTest {
 
+    @Step
     @Test(description = "Login test for the registered user.")
     void loginUserTest() {
         HomePage homePage = new HomePage();
@@ -31,6 +33,7 @@ class Tests extends BaseTest {
         assertTrue(accountArea.isAccountArea(), "User is NOT redirected to personal account page.");
     }
 
+    @Step("Compare products in the cart.")
     @Test(description = "Test to compare added and present products in the cart.")
     void cartsItemsTest() {
         int productsToTest = 2;
@@ -65,6 +68,7 @@ class Tests extends BaseTest {
         dialogCartMenu.deleteAllProducts().clickCloseCartBtn();
     }
 
+    @Step
     @Test(description = "Test to check filters.")
     void filtersCheck() {
         HomePage homePage = new HomePage();
@@ -119,6 +123,7 @@ class Tests extends BaseTest {
 
     //Проверка ссылок секции "Компания", "Покупателям" в футтере сайта
     // - последовательно перейти по каждой ссылке -> отображается страница корректная страница
+    @Step()
     @Test(dataProvider = "getDataForFooterLinksCheck")
     @Description("Test to check footer links.")
     void footerLinkCheck(String linkText, String  title) {

@@ -10,7 +10,7 @@
         </classes>
     </test>
 
-    <test name="InternetExplorerTest" verbose="1" parallel="true">
+<!--    <test name="InternetExplorerTest" verbose="1" parallel="true">
         <parameter name="browserName" value="ie" />
         <classes>
             <class name="tests.Tests" />
@@ -22,6 +22,6 @@
         <classes>
             <class name="tests.Tests" />
         </classes>
-    </test>
+    </test>-->
 
 </suite>
