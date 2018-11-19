@@ -2,7 +2,7 @@ package config;
 
 public enum BrowserNames {
     FIREFOX("firefox"),
-    INTERNET_EXPLORER("internet explorer"),
+    IE("ie"),
     CHROME("chrome");
 
     private final String browserName;

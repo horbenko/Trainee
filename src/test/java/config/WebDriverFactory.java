@@ -15,16 +15,14 @@ import java.nio.file.Paths;
 public class WebDriverFactory {
 
     public WebDriver getWebDriver(BrowserNames browserNames, RunMode runMode) {
-        WebDriver webDriver = null;
+        WebDriver webDriver;
         switch (runMode) {
             case LOCAL:
-                webDriver = getLocal(browserNames);
-                break;
+                return webDriver = getLocal(browserNames);
             case REMOTE:
-                webDriver = getRemote(browserNames);
-                break;
+                return webDriver = getRemote(browserNames);
+            default: return webDriver = getLocal(browserNames);
         }
-        return webDriver;
     }
 
     private WebDriver getRemote(BrowserNames browserName) {
@@ -38,7 +36,7 @@ public class WebDriverFactory {
             case FIREFOX:
                 capability = DesiredCapabilities.firefox();
                 return new RemoteWebDriver(capability);
-            case INTERNET_EXPLORER:
+            case IE:
                 capability = DesiredCapabilities.internetExplorer();
                 capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                 return new RemoteWebDriver(capability);
@@ -53,7 +51,7 @@ public class WebDriverFactory {
                         "webdriver.gecko.driver",
                         getResource("/drivers/geckodriver.exe"));
                 return new FirefoxDriver();
-            case INTERNET_EXPLORER:
+            case IE:
                 InternetExplorerOptions options1 = new InternetExplorerOptions();
                 options1.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS,true);
                 System.setProperty(
@@ -86,8 +84,8 @@ public class WebDriverFactory {
     }
 
     public enum RunMode {
-        LOCAL("LOCAL"),
-        REMOTE("REMOTE");
+        LOCAL("local"),
+        REMOTE("remote");
 
         private final String webDriverFactoryMode;
 

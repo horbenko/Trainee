@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="Test suite" parallel="tests" thread-count="1">
-    <parameter name="runMode" value="LOCAL"/>
+    <parameter name="runMode" value="local"/>
 
     <test name="ChromeTest" verbose="1" parallel="true">
         <parameter name="browserName" value="chrome" />

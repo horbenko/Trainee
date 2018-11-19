@@ -12,8 +12,6 @@ import static org.testng.Assert.assertTrue;
 
 class Tests extends BaseTest {
 
-
-
     @Test(description = "Login test for the registered user.")
     void loginUserTest() {
         HomePage homePage = new HomePage();

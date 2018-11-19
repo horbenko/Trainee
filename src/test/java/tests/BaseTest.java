@@ -8,10 +8,12 @@ import static config.WebDriverInstansiator.*;
 
 public class BaseTest {
 
-    @Parameters({"browserName", "runMode"})
     @BeforeClass
-    public void setUp(BrowserNames browserName, RunMode runMode){
-        setDriver(browserName, runMode);
+    @Parameters({"browserName", "runMode"})
+    public void setUp(String browserName, String runMode){
+        BrowserNames castedBrowserName = BrowserNames.valueOf(browserName.toUpperCase());
+        RunMode castedRunMode = RunMode.valueOf(runMode.toUpperCase());
+        setDriver(castedBrowserName, castedRunMode);
     }
 
     @AfterClass
