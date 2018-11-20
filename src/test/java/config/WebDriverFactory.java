@@ -19,6 +19,7 @@ public class WebDriverFactory {
         switch (runMode) {
             case REMOTE:
                 return webDriver = getRemote(browserNames);
+            case LOCAL:
             default:
                 return webDriver = getLocal(browserNames);
         }
@@ -28,9 +29,6 @@ public class WebDriverFactory {
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setJavascriptEnabled(true);
         switch (browserName) {
-            case CHROME:
-                capability = DesiredCapabilities.chrome();
-                return new RemoteWebDriver(capability);
             case FIREFOX:
                 capability = DesiredCapabilities.firefox();
                 return new RemoteWebDriver(capability);
@@ -38,11 +36,22 @@ public class WebDriverFactory {
                 capability = DesiredCapabilities.internetExplorer();
                 capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
                 return new RemoteWebDriver(capability);
-            default: throw new IllegalArgumentException("Unsupported " + browserName + " browserName.");
+            case CHROME:
+            default:
+                capability = DesiredCapabilities.chrome();
+                return new RemoteWebDriver(capability);
         }
     }
 
     private WebDriver getLocal(BrowserNames browserName) {
+        WebDriver webDriver;
+        if (getOS().contains("Window")) {
+            return webDriver = getForWindows(browserName);
+        } else
+            return webDriver = getForUnix(browserName);
+    }
+
+    private WebDriver getForWindows(BrowserNames browserName) {
         switch (browserName) {
             case FIREFOX:
                 System.setProperty(
@@ -57,24 +66,39 @@ public class WebDriverFactory {
                         getResource("/drivers/IEDriverServer.exe"));
                 return new InternetExplorerDriver(ieOptions);
             case CHROME:
+            default:
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("prefs", "--disable-notifications");
                 chromeOptions.addArguments("start-maximized");
-
-                System.out.println(getResource("chromedriver"));
-
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        "/usr/bin/chromedriver");
+                        getResource("/drivers/chromedriver.exe"));
                 return new ChromeDriver(chromeOptions);
-            default:
-                throw new IllegalArgumentException("Unsupported browser name.");
         }
     }
 
-    public void getOS() {
-        System.getProperty("os.name");
-        System.out.println(System.getProperty("os.name"));
+    private WebDriver getForUnix(BrowserNames browserName) {
+        switch (browserName) {
+            case FIREFOX:
+                System.setProperty(
+                        "webdriver.gecko.driver",
+                        getResource("/drivers/geckodriver"));
+                return new FirefoxDriver();
+            case IE: throw new IllegalArgumentException("Not supported browser for Unix/Linux OS.");
+            case CHROME:
+            default:
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("prefs", "--disable-notifications");
+                chromeOptions.addArguments("start-maximized");
+                System.setProperty(
+                        "webdriver.chrome.driver",
+                        getResource("/drivers/chromedriver"));
+                return new ChromeDriver(chromeOptions);
+        }
+    }
+
+    private String getOS() {
+        return System.getProperty("os.name");
     }
 
     /**
@@ -83,7 +107,6 @@ public class WebDriverFactory {
      */
     private String getResource(String resource) {
         try {
-            System.out.println(Paths.get(WebDriverFactory.class.getResource(resource).toURI()).toFile().getPath());
             return Paths.get(WebDriverFactory.class.getResource(resource).toURI()).toFile().getPath();
         } catch (URISyntaxException e) {
             e.printStackTrace();
