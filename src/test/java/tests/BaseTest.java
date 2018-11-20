@@ -22,4 +22,5 @@ public class BaseTest {
     public void tearDown() throws Exception{
         getDriver().quit();
     }
+
 }

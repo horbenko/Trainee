@@ -17,18 +17,16 @@ public class WebDriverFactory {
     public WebDriver getWebDriver(BrowserNames browserNames, RunMode runMode) {
         WebDriver webDriver;
         switch (runMode) {
-            case LOCAL:
-                return webDriver = getLocal(browserNames);
             case REMOTE:
                 return webDriver = getRemote(browserNames);
-            default: return webDriver = getLocal(browserNames);
+            default:
+                return webDriver = getLocal(browserNames);
         }
     }
 
     private WebDriver getRemote(BrowserNames browserName) {
         DesiredCapabilities capability = new DesiredCapabilities();
         capability.setJavascriptEnabled(true);
-
         switch (browserName) {
             case CHROME:
                 capability = DesiredCapabilities.chrome();
@@ -61,9 +59,10 @@ public class WebDriverFactory {
             case CHROME:
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("prefs", "--disable-notifications");
+                chromeOptions.addArguments("start-maximized");
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        getResource("/drivers/chromedriver.exe"));
+                        getResource("/drivers/chromedriver"));
                 return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");

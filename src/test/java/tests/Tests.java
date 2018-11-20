@@ -3,13 +3,13 @@ package tests;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.annotations.*;
-import pages.*;
-
 import java.util.List;
 import java.util.TreeSet;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
+import pages.*;
 
 class Tests extends BaseTest {
 
@@ -68,7 +68,7 @@ class Tests extends BaseTest {
         dialogCartMenu.deleteAllProducts().clickCloseCartBtn();
     }
 
-    @Step
+    @Step("Checking menu filters.")
     @Test(description = "Test to check filters.")
     void filtersCheck() {
         HomePage homePage = new HomePage();
@@ -123,7 +123,7 @@ class Tests extends BaseTest {
 
     //Проверка ссылок секции "Компания", "Покупателям" в футтере сайта
     // - последовательно перейти по каждой ссылке -> отображается страница корректная страница
-    @Step()
+    @Step("Checking footer links.")
     @Test(dataProvider = "getDataForFooterLinksCheck")
     @Description("Test to check footer links.")
     void footerLinkCheck(String linkText, String  title) {

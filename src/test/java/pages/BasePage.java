@@ -65,5 +65,4 @@ public class BasePage {
     boolean waitIsToBeTextPresent(WebElement element, String str) {
         return wait.until(ExpectedConditions.textToBePresentInElement(element, str));
     }
-
 }

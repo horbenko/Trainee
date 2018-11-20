@@ -12,11 +12,6 @@ import tests.BaseTest;
 
 public class TestListener extends BaseTest implements ITestListener {
 
-    private static String getTestMethodName(ITestResult iTestResult) {
-        return iTestResult.getMethod().getConstructorOrMethod().getName();
-    }
-
-    //Text attachments for Allure
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] saveScreenshotPNG (WebDriver driver) {
         return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
@@ -34,11 +29,8 @@ public class TestListener extends BaseTest implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        Object instance = iTestResult.getInstance();
-        WebDriver driver = ((WebDriverInstansiator) instance).getDriver();
-        if (driver instanceof WebDriver) {
+        WebDriver driver = WebDriverInstansiator.getDriver();
             saveScreenshotPNG(driver);
-        }
     }
 
     @Override
