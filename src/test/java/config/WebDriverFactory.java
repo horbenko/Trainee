@@ -79,12 +79,9 @@ public class WebDriverFactory {
      * @return Path to resource
      */
     private String getResource(String resource) {
-        try {
-            return Paths.get(WebDriverFactory.class.getResource(resource).toURI()).toFile().getPath();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        return resource;
+            return System.getProperty("user.dir") + "\\src\\test\\resources";
+
+
     }
 
     public enum RunMode {
