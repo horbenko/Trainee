@@ -60,11 +60,12 @@ public class WebDriverFactory {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("prefs", "--disable-notifications");
                 chromeOptions.addArguments("start-maximized");
+
                 System.out.println(getResource("chromedriver"));
 
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        getResource("/drivers/chromedriver.exe"));
+                        getResource("/drivers/chromedriver"));
                 return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");
@@ -82,6 +83,7 @@ public class WebDriverFactory {
      */
     private String getResource(String resource) {
         try {
+            System.out.println(Paths.get(WebDriverFactory.class.getResource(resource).toURI()).toFile().getPath());
             return Paths.get(WebDriverFactory.class.getResource(resource).toURI()).toFile().getPath();
         } catch (URISyntaxException e) {
             e.printStackTrace();
