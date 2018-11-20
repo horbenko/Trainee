@@ -61,9 +61,10 @@ public class WebDriverFactory {
                 chromeOptions.addArguments("prefs", "--disable-notifications");
                 chromeOptions.addArguments("start-maximized");
                 System.out.println(getResource("chromedriver"));
+
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        getResource("chromedriver"));
+                        "\\usr\\bin\\google-chrome");
                 return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");
