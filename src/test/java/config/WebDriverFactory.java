@@ -64,7 +64,7 @@ public class WebDriverFactory {
 
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        System.getProperty("user.dir") + "\\src\\test\\resources\\chromedriver");
+                        getResource("/drivers/chromedriver"));
                 return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");
@@ -81,7 +81,12 @@ public class WebDriverFactory {
      * @return Path to resource
      */
     private String getResource(String resource) {
-            return System.getProperty("user.dir") + "\\src\\test\\resources\\" + resource;
+        try {
+            return Paths.get(WebDriverFactory.class.getResource(resource).toURI()).toFile().getPath();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return resource;
     }
 
     public enum RunMode {
