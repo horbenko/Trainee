@@ -64,7 +64,7 @@ public class WebDriverFactory {
 
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        getResource("/drivers/chromedriver"));
+                        getResource("/drivers/chromedriver.exe"));
                 return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");
