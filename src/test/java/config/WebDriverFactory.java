@@ -64,7 +64,7 @@ public class WebDriverFactory {
 
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        "\\usr\\bin\\google-chrome");
+                        System.getProperty("user.dir") + "\\src\\test\\resources\\chromedriver");
                 return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");
