@@ -62,7 +62,7 @@ public class WebDriverFactory {
                 chromeOptions.addArguments("start-maximized");
                 System.setProperty(
                         "webdriver.chrome.driver",
-                        getResource("/drivers/chromedriver"));
+                        getResource("\\drivers\\chromedriver"));
                 return new ChromeDriver(chromeOptions);
             default:
                 throw new IllegalArgumentException("Unsupported browser name.");
@@ -79,7 +79,7 @@ public class WebDriverFactory {
      * @return Path to resource
      */
     private String getResource(String resource) {
-            return System.getProperty("user.dir") + "\\src\\test\\resources";
+            return System.getProperty("user.dir") + "\\src\\test\\resources" + resource;
 
 
     }
